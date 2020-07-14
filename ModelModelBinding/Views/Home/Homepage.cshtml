@@ -1,0 +1,106 @@
+﻿@model ModelModelBinding.ViewModels.HomepageViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Homepage</title>
+</head>
+<body>
+    <div> 
+        <h2>Home Page</h2>
+        <hr />
+    </div>
+    <div>
+        <p>Ön Bİlgi:</p>
+        <p>Model kullanımında bir sayfa en fazla bir model tanımlanabiliyor tip olarak.
+        Yeni bir model daha lazım diyor isek yeni model yapmamız gerekmekte.</p>
+        <p>Aşağıdaki model için hazırlanan Controller kodu ve post kodu:</p>
+        <pre>
+        public ActionResult Homepage()
+        {
+            Person kisi = new Person();
+            kisi.Ad = "Melih";
+            kisi.soyad = "Akkose";
+            kisi.yas = 21;
+            kisi.mail = "melihakkse@hotmail.com";
+            return View(kisi);
+        }
+        [HttpPost]
+        public ActionResult Homepage(Person kisi)
+        {
+            return View(kisi);
+        }
+</pre>
+
+        <p>Modeli tanımlama kodu:</p>
+        <pre>
+model ModelModelBinding.Models.Person
+ya da
+using ModelModelBinding.Models
+model Person
+</pre>
+        <p>HTML tarafında yazılan kodlar:</p>
+        <pre>
+
+        div>
+        h2>Person/h2>
+        b>Ad: /b>Model.Adbr />
+
+        b>Soyad:/b>Model.soyadbr />
+
+        b>Yas: /b>Model.yasbr />
+
+        b>Mail: /b>Model.mailbr />
+
+
+        p>Developer: (Model.Ad +" "+Model.soyad)/p>
+        /div>
+        div>
+        using (Html.BeginForm())
+        {
+        b>Ad:/b>Html.TextBoxFor(model => model.Ad) br />
+
+        b>Soyad:/b>Html.TextBoxFor(model => model.soyad)br />
+
+        b>Mail:/b>Html.TextBoxFor(model => model.mail)br />
+
+        b>Yas:b/>Html.TextBoxFor(model => model.yas)br />
+
+        input type="submit" value="Send" />
+        }
+        /div>
+</pre>
+    </div>
+    <div>
+        <h2>Person</h2>
+        <b>Ad: </b>@Model.kisiNesnesi.Ad<br />
+        <b>Soyad:</b>@Model.kisiNesnesi.soyad<br />
+        <b>Yas: </b>@Model.kisiNesnesi.yas<br />
+        <b>Mail: </b>@Model.kisiNesnesi.mail<br />
+        <hr />
+        <b>İl/ilçe:</b>@(Model.adresNesnesi.il+ " "+Model.adresNesnesi.ilce)
+        
+        <hr />
+        <p>Developer: @(Model.kisiNesnesi.Ad +" "+Model.kisiNesnesi.soyad)</p>
+    </div>
+    <hr />
+    <div>
+        @using (Html.BeginForm())
+        {
+            <b>Ad:</b>@Html.TextBoxFor(model => model.kisiNesnesi.Ad) <br />
+            <b>Soyad:</b>@Html.TextBoxFor(model => model.kisiNesnesi.soyad)<br />
+            <b>Mail:</b>@Html.TextBoxFor(model => model.kisiNesnesi.mail)<br />
+            <b>Yas:</b>@Html.TextBoxFor(model => model.kisiNesnesi.yas)<br />
+            <hr />
+            <b>İl:</b>@Html.TextBoxFor(model => model.adresNesnesi.il)<br />
+            <b>İlçe:</b>@Html.TextBoxFor(model => model.adresNesnesi.ilce)<br />
+            <input type="submit" value="Send" />
+        }
+    </div>
+</body>
+</html>
